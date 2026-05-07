@@ -1,0 +1,26 @@
+<XMLDB PATH="admin/tool/import_user_datas/db"
+       VERSION="2025040300"
+       COMMENT="XMLDB file for Moodle admin/import_user_datas"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="../../../../lib/xmldb/xmldb.xsd"
+    >
+    <TABLES>
+        <TABLE NAME="tool_import_user_datas" COMMENT="import_user_datas scheduled imports">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="username" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="auth" TYPE="char" LENGTH="254" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="status" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+                <FIELD NAME="timeprocessed" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="username"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="username" UNIQUE="true" FIELDS="username"/>
+            </INDEXES>
+        </TABLE>
+    </TABLES>
+</XMLDB>
