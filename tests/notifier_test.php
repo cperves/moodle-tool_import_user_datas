@@ -33,7 +33,6 @@ use tool_import_user_datas\user_import_preferences_and_datas_task;
  * notifier test class
  */
 final class notifier_test extends advanced_testcase {
-
     /**
      * Test task schedule notifications
      * @covers \local_generic_admin_notifier\admin_notification_list::notify_admin

@@ -28,9 +28,10 @@ use tool_import_user_datas\reportbuilder\local\systemreports\import_user_datas_t
 use tool_import_user_datas\user_import_preferences_and_datas_task;
 
 require(__DIR__ . '/../../../../config.php');
-require_once($CFG->libdir.'/adminlib.php');
+require_once($CFG->libdir . '/adminlib.php');
 
-admin_externalpage_setup('import_user_datas_managment',
+admin_externalpage_setup(
+    'import_user_datas_managment',
     '',
     [],
     new moodle_url('/admin/tool/impor_user_datas/admin/index.php', [])
@@ -42,10 +43,13 @@ if ($data = $addimporttaskform->get_data()) {
     $return = user_import_preferences_and_datas_task::schedule_user_datas_import($data->username, $data->auth);
     if ($return) {
         echo $OUTPUT->notification(
-            get_string('task_added_success', 'tool_import_user_datas',
+            get_string(
+                'task_added_success',
+                'tool_import_user_datas',
                 (object)['username' => $data->username, 'auth' => $data->auth]
             ),
-            'success');
+            'success'
+        );
         $addimporttaskform->reset();
     }
 }

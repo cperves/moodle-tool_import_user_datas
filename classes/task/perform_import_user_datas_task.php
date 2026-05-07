@@ -34,7 +34,6 @@ global $CFG;
  * import user datas adhoc task class
  */
 class perform_import_user_datas_task extends adhoc_task {
-
     /**
      * execute adhoc task
      * @return void
@@ -44,5 +43,4 @@ class perform_import_user_datas_task extends adhoc_task {
         $data = $this->get_custom_data();
         tools::import_preferences_and_datas($data);
     }
-
 }

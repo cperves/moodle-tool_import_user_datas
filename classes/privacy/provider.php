@@ -48,10 +48,9 @@ global $CFG;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements
-        \core_privacy\local\metadata\provider,
-        \core_privacy\local\request\core_userlist_provider,
-        \core_privacy\local\request\plugin\provider {
-
+    \core_privacy\local\metadata\provider,
+    \core_privacy\local\request\core_userlist_provider,
+    \core_privacy\local\request\plugin\provider {
     /**
      * Returns meta data about this system.
      * @param collection $collection
@@ -141,7 +140,8 @@ class provider implements
         // Return database entries.
         foreach ($aprovedcontextlist as $approvedcontext) {
             if ($approvedcontext instanceof \context_user) {
-                $entries = $DB->get_records_sql('select i.* from {tool_import_user_datas} i
+                $entries = $DB->get_records_sql(
+                    'select i.* from {tool_import_user_datas} i
                     inner join {user} u on u.username=i.username where u.id=:userid',
                     ['userid' => $approvedcontext->instanceid]
                 );
@@ -205,9 +205,7 @@ class provider implements
                 );
             }
         }
-
     }
-
     /**
      * Delete multiple users within a single context.
      *
@@ -225,10 +223,10 @@ class provider implements
                          select username from {user} where id=:userid
                         )
                         and status <> :status",
-                        [
-                            'userid' => $context->instanceid,
-                            'status' => user_import_preferences_and_datas_task::STATUS_INPROGRESS,
-                        ]
+                    [
+                        'userid' => $context->instanceid,
+                        'status' => user_import_preferences_and_datas_task::STATUS_INPROGRESS,
+                    ]
                 );
             }
         }
@@ -240,13 +238,11 @@ class provider implements
      * @return mixed
      */
     protected static function validate_contextlist_contexts(approved_contextlist $contextlist, $contextlevellist) {
-        return array_reduce($contextlist->get_contexts(), function($carry, $context) use($contextlevellist) {
+        return array_reduce($contextlist->get_contexts(), function ($carry, $context) use ($contextlevellist) {
             if (in_array($context->contextlevel, $contextlevellist)) {
                 $carry[$context->id] = $context;
             }
             return $carry;
         }, []);
     }
-
 }
-

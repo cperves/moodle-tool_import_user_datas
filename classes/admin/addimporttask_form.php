@@ -49,16 +49,31 @@ class addimporttask_form extends moodleform {
         $mform = &$this->_form;
         $mform->addElement('text', 'username', get_string('username'));
         $mform->setType('username', PARAM_TEXT);
-        $mform->addRule('username', get_string('required'),
-                'required', null, 'client');
+        $mform->addRule(
+            'username',
+            get_string('required'),
+            'required',
+            null,
+            'client'
+        );
         $mform->addElement('text', 'auth', get_string('auth', 'tool_import_user_datas'));
         $mform->setType('auth', PARAM_TEXT);
-        $mform->addRule('auth', get_string('required'),
-            'required', null, 'client');
+        $mform->addRule(
+            'auth',
+            get_string('required'),
+            'required',
+            null,
+            'client'
+        );
         $mform->addHelpButton('auth', 'auth', 'tool_import_user_datas');
-        $mform->addElement('submit', 'submit', get_string('addimportusertask',
-            'tool_import_user_datas'));
-
+        $mform->addElement(
+            'submit',
+            'submit',
+            get_string(
+                'addimportusertask',
+                'tool_import_user_datas'
+            )
+        );
     }
 
     /**
@@ -73,13 +88,17 @@ class addimporttask_form extends moodleform {
         global $DB;
         $errors = parent::validation($data, $files);
         if (!$DB->record_exists('user', ['username' => $data['username']])) {
-            $errors['username'] = get_string('user_not_exists', 'tool_import_user_datas',
+            $errors['username'] = get_string(
+                'user_not_exists',
+                'tool_import_user_datas',
                 (object)['username' => $data['username'], 'auth' => $data['auth']]
             );
         }
         if ($DB->record_exists('tool_import_user_datas', ['username' => $data['username']])) {
-            $errors['username'] = get_string('import_taskXuser_already_exists',
-                 'tool_import_user_datas', $data['username']
+            $errors['username'] = get_string(
+                'import_taskXuser_already_exists',
+                'tool_import_user_datas',
+                $data['username']
             );
         }
         return $errors;
@@ -93,8 +112,7 @@ class addimporttask_form extends moodleform {
     public function reset() {
         $mform = &$this->_form;
         foreach ($mform->_elements as $element) {
-            if ( $element instanceof MoodleQuickForm_text
-            ) {
+            if ($element instanceof MoodleQuickForm_text) {
                 $element->setValue("");
             }
         }

@@ -56,5 +56,3 @@ $services = [
         'shortname' => 'wstoolimportuserdatas',
     ],
 ];
-
-

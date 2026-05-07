@@ -41,7 +41,6 @@ use stdClass;
  * Unit tests for the privacy API implementation.
  */
 final class privacy_provider_test extends provider_testcase {
-
     /**
      * Tests get_contexts_for_userid function.
      * @covers \tool_import_user_datas\privacy\provider::get_contexts_for_userid

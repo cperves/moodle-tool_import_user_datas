@@ -31,19 +31,22 @@
 use tool_import_user_datas\user_import_preferences_and_datas_task;
 
 define('CLI_SCRIPT', true);
-require(__DIR__.'/../../../../config.php');
+require(__DIR__ . '/../../../../config.php');
 global $CFG, $DB;
 require_once("$CFG->libdir/clilib.php");
 
-list($options, $unrecognised) = cli_get_params([
-    'help' => false,
-    'auth' => null,
-    'username' => null,
-], [
-    'h' => 'help',
-    'a' => 'auth',
-    'u' => 'username',
-]);
+[$options, $unrecognised] = cli_get_params(
+    [
+        'help' => false,
+        'auth' => null,
+        'username' => null,
+    ],
+    [
+        'h' => 'help',
+        'a' => 'auth',
+        'u' => 'username',
+    ]
+);
 
 $usage = "
 Add existing users to import user datas tasks depending of their auth method
@@ -64,7 +67,7 @@ Options:
 ";
 
 if ($unrecognised) {
-    $unrecognised = implode(PHP_EOL.'  ', $unrecognised);
+    $unrecognised = implode(PHP_EOL . '  ', $unrecognised);
     cli_error(get_string('cliunknowoption', 'core_admin', $unrecognised));
 }
 
@@ -76,7 +79,7 @@ if ($options['help']) {
 $auth = $options['auth'];
 $username = $options['username'];
 $concernedusers = [];
-if ($auth != null ) {
+if ($auth != null) {
     $auth = explode(';', $auth);
     if (count($auth) == 0) {
         cli_error('auth is empty, please enter a valid auth');
@@ -94,17 +97,19 @@ if ($auth != null ) {
         $concerneduser->auth = $auth[0];
         $concerneduser->id = $userid;
         $concernedusers[] = $concerneduser;
-
     } else {
-        list($where, $params) = $DB->get_in_or_equal(array_values($auth));
-        $concernedusers = $DB->get_records_sql('select id, username, auth from {user} where auth '.$where, $params);
+        [$where, $params] = $DB->get_in_or_equal(array_values($auth));
+        $concernedusers = $DB->get_records_sql(
+            'select id, username, auth from {user} where auth ' . $where,
+            $params
+        );
     }
 } else {
     cli_error('auth parameter is required');
 }
 
 foreach ($concernedusers as $concerneduser) {
-    if ( $DB->get_record('tool_import_user_datas', ['username' => ''.$concerneduser->username]) ) {
+    if ($DB->get_record('tool_import_user_datas', ['username' => '' . $concerneduser->username])) {
         cli_writeln("user $concerneduser->username already programmed for user import datas.");
     } else {
         user_import_preferences_and_datas_task::schedule_user_datas_import($concerneduser->username, $concerneduser->auth);

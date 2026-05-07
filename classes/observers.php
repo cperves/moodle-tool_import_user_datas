@@ -28,7 +28,6 @@ namespace tool_import_user_datas;
  * event observer class
  */
 class observers {
-
     /**
      * user created event handler
      * @param \core\event\user_created $event
@@ -42,7 +41,7 @@ class observers {
         if ($config->trigger_on_create) {
             $user = $DB->get_record('user', ['id' => $event->objectid]);
             if ($user != false && $user->auth == $config->user_auth) {
-                if ( $user->mnethostid != $CFG->mnet_localhost_id) {
+                if ($user->mnethostid != $CFG->mnet_localhost_id) {
                     mtrace("username $user->username with mnethostid = $user->mnethostid not programmed because not same site.");
                 }
                 // Check that an other task with same username is not already in task table.

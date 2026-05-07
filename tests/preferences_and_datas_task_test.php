@@ -27,7 +27,6 @@ use tool_import_user_datas\task\perform_scheduled_preferences_import;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 final class preferences_and_datas_task_test extends advanced_testcase {
-
     /**
      * test task scheduled
      * @covers \tool_import_user_datas\user_import_preferences_and_datas_task::schedule_user_datas_import
@@ -76,7 +75,6 @@ final class preferences_and_datas_task_test extends advanced_testcase {
             user_import_preferences_and_datas_task::STATUS_PERFORMED
         );
         $this->check_status($user->username, user_import_preferences_and_datas_task::STATUS_PERFORMED);
-
     }
 
     /**

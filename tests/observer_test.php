@@ -32,7 +32,6 @@ use advanced_testcase;
  * Observer tests
  */
 final class observer_test extends advanced_testcase {
-
     /**
      * Test user creation
      * @covers \tool_import_user_datas\observers::user_created
@@ -69,7 +68,8 @@ final class observer_test extends advanced_testcase {
         $this->getDataGenerator()->create_user(['username' => 'cigale', 'auth' => 'manual', 'mnethostid' => 0]);
         $output = ob_get_contents();
         ob_end_clean();
-        $this->assertStringStartsWith('username cigale with mnethostid = 0 not programmed because not same site.',
+        $this->assertStringStartsWith(
+            'username cigale with mnethostid = 0 not programmed because not same site.',
             $output
         );
         $tasks = $DB->get_records('tool_import_user_datas');

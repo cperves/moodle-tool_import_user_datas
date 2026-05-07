@@ -42,7 +42,6 @@ use tool_import_user_datas\user_import_preferences_and_datas_task;
  * import user datas entities for listing tasks
  */
 class import_user_datas_task extends base {
-
     /**
      * Database tables that this entity uses
      * @return string[]
@@ -105,28 +104,36 @@ class import_user_datas_task extends base {
         $useralias = $this->get_table_alias('user');
         $columns[] = (
             new column(
-                'id', new lang_string('id', 'tool_import_user_datas'), $this->get_entity_name()
+                'id',
+                new lang_string('id', 'tool_import_user_datas'),
+                $this->get_entity_name()
             ))
             ->set_type(column::TYPE_INTEGER)
             ->add_field("{$tablealias}.id")
             ->set_is_sortable(true);
         $columns[] = (
             new column(
-                'username', new lang_string('username', 'tool_import_user_datas'), $this->get_entity_name()
+                'username',
+                new lang_string('username', 'tool_import_user_datas'),
+                $this->get_entity_name()
             ))
             ->set_type(column::TYPE_TEXT)
             ->add_field("{$tablealias}.username")
             ->set_is_sortable(true);
         $columns[] = (
         new column(
-            'auth', new lang_string('auth', 'tool_import_user_datas'), $this->get_entity_name()
+            'auth',
+            new lang_string('auth', 'tool_import_user_datas'),
+            $this->get_entity_name()
         ))
             ->set_type(column::TYPE_TEXT)
             ->add_field("{$tablealias}.auth")
             ->set_is_sortable(true);
         $columns[] = (
             new column(
-                'firstname', new lang_string('firstname', 'tool_import_user_datas'), $this->get_entity_name()
+                'firstname',
+                new lang_string('firstname', 'tool_import_user_datas'),
+                $this->get_entity_name()
             ))
             ->add_join($this->get_user_join())
             ->set_type(column::TYPE_TEXT)
@@ -134,7 +141,9 @@ class import_user_datas_task extends base {
             ->set_is_sortable(true);
         $columns[] = (
             new column(
-                'lastname', new lang_string('lastname', 'tool_import_user_datas'), $this->get_entity_name()
+                'lastname',
+                new lang_string('lastname', 'tool_import_user_datas'),
+                $this->get_entity_name()
             ))
             ->add_join($this->get_user_join())
             ->set_type(column::TYPE_TEXT)
@@ -142,7 +151,9 @@ class import_user_datas_task extends base {
             ->set_is_sortable(true);
         $columns[] = (
             new column(
-                'email', new lang_string('email', 'tool_import_user_datas'), $this->get_entity_name()
+                'email',
+                new lang_string('email', 'tool_import_user_datas'),
+                $this->get_entity_name()
             ))
             ->add_join($this->get_user_join())
             ->set_type(column::TYPE_TEXT)
@@ -150,12 +161,14 @@ class import_user_datas_task extends base {
             ->set_is_sortable(true);
         $columns[] = (
         new column(
-            'status', new lang_string('status', 'tool_import_user_datas'), $this->get_entity_name()
+            'status',
+            new lang_string('status', 'tool_import_user_datas'),
+            $this->get_entity_name()
         ))
             ->set_type(column::TYPE_TEXT)
             ->add_fields("{$tablealias}.status, {$tablealias}.id")
             ->set_is_sortable(true)
-            ->set_callback(static function(?string $value, \stdClass $row): string {
+            ->set_callback(static function (?string $value, \stdClass $row): string {
                 global $OUTPUT;
                 $url = new moodle_url('/admin/tool/import_user_datas/WS');
                 $options = [
@@ -169,14 +182,19 @@ class import_user_datas_task extends base {
                         new lang_string('errorstatus', 'tool_import_user_datas'),
                 ];
                 $selectmenu = \html_writer::select(
-                    $options, 'status_select_'.$row->id, $value, null,
-                    ['onchange' => 'asyncchangestatus('.$row->id.')']
+                    $options,
+                    'status_select_' . $row->id,
+                    $value,
+                    null,
+                    ['onchange' => 'asyncchangestatus(' . $row->id . ')']
                 );
                 return $selectmenu;
             });
         $columns[] = (
             new column(
-                'timecreated', new lang_string('timecreated', 'tool_import_user_datas'), $this->get_entity_name()
+                'timecreated',
+                new lang_string('timecreated', 'tool_import_user_datas'),
+                $this->get_entity_name()
             ))
             ->add_joins($this->get_joins())
             ->set_type(column::TYPE_TIMESTAMP)
@@ -186,7 +204,9 @@ class import_user_datas_task extends base {
             ->add_callback(fn($value) => $value ?: get_string('never'));
         $columns[] = (
             new column(
-                'timemodified', new lang_string('timemodified', 'tool_import_user_datas'), $this->get_entity_name()
+                'timemodified',
+                new lang_string('timemodified', 'tool_import_user_datas'),
+                $this->get_entity_name()
             ))
             ->add_joins($this->get_joins())
             ->set_type(column::TYPE_TIMESTAMP)
@@ -196,7 +216,9 @@ class import_user_datas_task extends base {
             ->add_callback(fn($value) => $value ?: get_string('never'));
         $columns[] = (
             new column(
-                'timeprocessed', new lang_string('timeprocessed', 'tool_import_user_datas'), $this->get_entity_name()
+                'timeprocessed',
+                new lang_string('timeprocessed', 'tool_import_user_datas'),
+                $this->get_entity_name()
             ))
             ->add_joins($this->get_joins())
             ->set_type(column::TYPE_TIMESTAMP)
@@ -264,7 +286,7 @@ class import_user_datas_task extends base {
             ))
                 ->add_joins($this->get_joins())
                 ->set_options_callback(
-                    static function(): array {
+                    static function (): array {
                         $status = [
                             user_import_preferences_and_datas_task::STATUS_SHEDULED =>
                                 new lang_string('scheduledstatus', 'tool_import_user_datas'),
@@ -336,5 +358,4 @@ class import_user_datas_task extends base {
 
         return $filters;
     }
-
 }

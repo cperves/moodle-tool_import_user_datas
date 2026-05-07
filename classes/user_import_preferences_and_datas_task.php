@@ -94,8 +94,12 @@ class user_import_preferences_and_datas_task {
      */
     public static function update_scheduled_status($username, $status): bool {
         global $DB;
-        if ( !in_array($status,
-            [self::STATUS_INPROGRESS, self::STATUS_PERFORMED, self::STATUS_SHEDULED, self::STATUS_ERROR])) {
+        if (
+            !in_array(
+                $status,
+                [self::STATUS_INPROGRESS, self::STATUS_PERFORMED, self::STATUS_SHEDULED, self::STATUS_ERROR]
+            )
+        ) {
             throw new moodle_exception('bad status parameter');
         }
         $record = $DB->get_record('tool_import_user_datas', ['username' => $username]);
@@ -120,8 +124,12 @@ class user_import_preferences_and_datas_task {
      */
     public static function update_scheduled_status_by_id($taskid, $status): bool {
         global $DB;
-        if ( !in_array($status,
-            [self::STATUS_INPROGRESS, self::STATUS_PERFORMED, self::STATUS_SHEDULED, self::STATUS_ERROR])) {
+        if (
+            !in_array(
+                $status,
+                [self::STATUS_INPROGRESS, self::STATUS_PERFORMED, self::STATUS_SHEDULED, self::STATUS_ERROR]
+            )
+        ) {
             throw new moodle_exception('bad status parameter');
         }
         $record = $DB->get_record('tool_import_user_datas', ['id' => $taskid]);
@@ -163,7 +171,6 @@ class user_import_preferences_and_datas_task {
             $params = ['status' => $status];
         }
         return $DB->get_records_sql($request, $params);
-
     }
 
     /**

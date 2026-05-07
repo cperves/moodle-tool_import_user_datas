@@ -34,7 +34,6 @@ global $CFG;
  * Tool test class
  */
 final class tools_test extends advanced_testcase {
-
     /**
      * test tools::set_user_preferences_and_datas
      * @covers \tool_import_user_datas\tools::set_user_preferences_and_datas
@@ -81,7 +80,7 @@ final class tools_test extends advanced_testcase {
             (object)['name' => 'timezone', 'value' => 'Europe/Berlin'],
             (object)['name' => 'idnumber', 'value' => '42;-)'],
             (object)['name' => 'institution', 'value' => 'Université de Strasbourg'],
-            (object)['name' => 'department' , 'value' => 'DIP'],
+            (object)['name' => 'department', 'value' => 'DIP'],
             (object)['name' => 'phone1', 'value' => '42'],
             (object)['name' => 'phone2', 'value' => '43'],
             (object)['name' => 'address', 'value' => 'somewhere over the rainbow'],
@@ -128,8 +127,10 @@ final class tools_test extends advanced_testcase {
         $this->assertEquals(42, $userpreferences['calendar_lookahead']);
         $this->assertEquals(1, $userpreferences['calendar_persistflt']);
         $this->assertEquals(0, $userpreferences['core_contentbank_visibility']);
-        $this->assertEquals(\core_message\api::MESSAGE_PRIVACY_ONLYCONTACTS,
-            $userpreferences['message_blocknoncontacts']);
+        $this->assertEquals(
+            \core_message\api::MESSAGE_PRIVACY_ONLYCONTACTS,
+            $userpreferences['message_blocknoncontacts']
+        );
         $this->assertEquals('none', $userpreferences['message_provider_moodle_instantmessage_enabled']);
         $this->assertEquals(0, $userpreferences['message_entertosend']);
         $this->assertEquals('EUC-JP', $userpreferences['mailcharset']);
@@ -162,8 +163,11 @@ final class tools_test extends advanced_testcase {
         $this->setUser($user);
         $this->expectException(required_capability_exception::class);
         $this->expectExceptionMessage(
-            get_string('nopermissions', 'error',
-                get_string('import_user_datas:set_user_preferences_and_datas_for_user',
+            get_string(
+                'nopermissions',
+                'error',
+                get_string(
+                    'import_user_datas:set_user_preferences_and_datas_for_user',
                     'tool_import_user_datas'
                 )
             )
@@ -184,21 +188,20 @@ final class tools_test extends advanced_testcase {
         set_config(
             'preferences',
             'forum_useexperimentalui;forum_markasreadonnotification;htmleditor;'
-            .'timeformat;calendar_startwday;calendar_maxevents;'
-            .'calendar_lookahead;calendar_persistflt;'
-            .'core_contentbank_visibility;'
-            .'message_blocknoncontacts;message_provider_moodle_instantmessage_enabled;message_entertosend;'
-            .'mailcharset',
+            . 'timeformat;calendar_startwday;calendar_maxevents;'
+            . 'calendar_lookahead;calendar_persistflt;'
+            . 'core_contentbank_visibility;'
+            . 'message_blocknoncontacts;message_provider_moodle_instantmessage_enabled;message_entertosend;'
+            . 'mailcharset',
             'tool_import_user_datas'
         );
         set_config(
             'user_datas',
             'firstnamephonetic;lastnamephonetic;middlename;alternatename;maildigest;autosubscribe;trackforums;'
-            .'lang;calendartype;mailformat;'
-            .'city;country;lang;timezone;idnumber;institution;department;phone1;phone2;address',
+            . 'lang;calendartype;mailformat;'
+            . 'city;country;lang;timezone;idnumber;institution;department;phone1;phone2;address',
             'tool_import_user_datas'
         );
-
     }
 
     /**
@@ -214,11 +217,25 @@ final class tools_test extends advanced_testcase {
         $wsuser = $this->getDataGenerator()->create_user();
         $roleid = $this->getDataGenerator()->create_role();
         $wsrole = $DB->get_record('role', ['id' => $roleid]);
-        assign_capability('tool/import_user_datas:get_user_preferences_and_datas_for_user', CAP_ALLOW,
-            $wsrole->id, $systemcontext->id, true);
-        assign_capability('tool/import_user_datas:set_user_preferences_and_datas_for_user', CAP_ALLOW,
-            $wsrole->id, $systemcontext->id, true);
-        role_assign($wsrole->id, $wsuser->id, $systemcontext->id);
+        assign_capability(
+            'tool/import_user_datas:get_user_preferences_and_datas_for_user',
+            CAP_ALLOW,
+            $wsrole->id,
+            $systemcontext->id,
+            true
+        );
+        assign_capability(
+            'tool/import_user_datas:set_user_preferences_and_datas_for_user',
+            CAP_ALLOW,
+            $wsrole->id,
+            $systemcontext->id,
+            true
+        );
+        role_assign(
+            $wsrole->id,
+            $wsuser->id,
+            $systemcontext->id
+        );
         // Add necessary capabilities for restore user.
         accesslib_clear_all_caches_for_unit_testing();
         $this->setUser($wsuser);

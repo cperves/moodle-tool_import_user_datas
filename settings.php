@@ -33,10 +33,14 @@ if ($hassiteconfig) {
     $ADMIN->add('tools', $myexternalfolder);
     $settings = new admin_settingpage('tool_import_user_datas', get_string('settings', 'tool_import_user_datas'));
     $ADMIN->add('toolsimportuserdatasfolder', $settings);
-    $settings->add(new admin_setting_configcheckbox('tool_import_user_datas/activated',
-        get_string('activated', 'tool_import_user_datas'),
-        get_string('activated_desc', 'tool_import_user_datas'),
-        0));
+    $settings->add(
+        new admin_setting_configcheckbox(
+            'tool_import_user_datas/activated',
+            get_string('activated', 'tool_import_user_datas'),
+            get_string('activated_desc', 'tool_import_user_datas'),
+            0
+        )
+    );
     $settings->add(
         new admin_setting_configtext(
             "tool_import_user_datas/remote_url",
@@ -67,13 +71,13 @@ if ($hassiteconfig) {
             get_string('preferences', 'tool_import_user_datas'),
             get_string('preferences_desc', 'tool_import_user_datas'),
             'forum_useexperimentalui;forum_markasreadonnotification;htmleditor;'
-            .'timeformat;calendar_startwday;calendar_maxevents;'
-            .'calendar_lookahead;calendar_persistflt;'
-            .'core_contentbank_visibility;'
-            .'message_blocknoncontacts;message_provider_moodle_instantmessage_enabled;message_entertosend;'
-            .'mailcharset'
-            , PARAM_TEXT
-            )
+            . 'timeformat;calendar_startwday;calendar_maxevents;'
+            . 'calendar_lookahead;calendar_persistflt;'
+            . 'core_contentbank_visibility;'
+            . 'message_blocknoncontacts;message_provider_moodle_instantmessage_enabled;message_entertosend;'
+            . 'mailcharset',
+            PARAM_TEXT
+        )
     );
     $settings->add(
         new admin_setting_configtext(
@@ -81,19 +85,27 @@ if ($hassiteconfig) {
             get_string('user_datas', 'tool_import_user_datas'),
             get_string('user_datas_desc', 'tool_import_user_datas'),
             'firstnamephonetic;lastnamephonetic;middlename;alternatename;maildigest;autosubscribe;'
-            .'trackforums;lang;calendartype;mailformat;'
-            .'city;country;lang;timezone;idnumber;institution;department;phone1;phone2;address',
+            . 'trackforums;lang;calendartype;mailformat;'
+            . 'city;country;lang;timezone;idnumber;institution;department;phone1;phone2;address',
             PARAM_TEXT
         )
     );
-    $settings->add(new admin_setting_configcheckbox('tool_import_user_datas/trigger_on_create',
-        get_string('trigger_on_create', 'tool_import_user_datas'),
-        get_string('trigger_on_create_desc', 'tool_import_user_datas'),
-        0));
-    $settings->add(new admin_setting_configcheckbox('tool_import_user_datas/adhoctaks',
-        get_string('adhoctaks', 'tool_import_user_datas'),
-        get_string('adhoctaks_desc', 'tool_import_user_datas'),
-        0));
+    $settings->add(
+        new admin_setting_configcheckbox(
+            'tool_import_user_datas/trigger_on_create',
+            get_string('trigger_on_create', 'tool_import_user_datas'),
+            get_string('trigger_on_create_desc', 'tool_import_user_datas'),
+            0
+        )
+    );
+    $settings->add(
+        new admin_setting_configcheckbox(
+            'tool_import_user_datas/adhoctaks',
+            get_string('adhoctaks', 'tool_import_user_datas'),
+            get_string('adhoctaks_desc', 'tool_import_user_datas'),
+            0
+        )
+    );
     $setting = new admin_setting_configtext(
         "tool_import_user_datas/paging",
         get_string('paging', 'tool_import_user_datas'),
@@ -105,10 +117,13 @@ if ($hassiteconfig) {
         $setting
     );
     $setting->set_required_flag_options(admin_setting_flag::ENABLED, false);
-    $ADMIN->add('toolsimportuserdatasfolder',
+    $ADMIN->add(
+        'toolsimportuserdatasfolder',
         new admin_externalpage(
             'import_user_datas_managment',
             get_string('managetasks', 'tool_import_user_datas'),
             "$CFG->wwwroot/admin/tool/import_user_datas/admin/index.php",
-            'moodle/site:config'));
+            'moodle/site:config'
+        )
+    );
 }

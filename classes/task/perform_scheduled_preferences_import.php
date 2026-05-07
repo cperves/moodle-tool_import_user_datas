@@ -29,7 +29,6 @@ use tool_import_user_datas\tools;
  * user import datas scheduled task
  */
 class perform_scheduled_preferences_import extends \core\task\scheduled_task {
-
     /**
      * Name for this task.
      *
@@ -48,6 +47,5 @@ class perform_scheduled_preferences_import extends \core\task\scheduled_task {
             return;
         }
         tools::import_user_preferences_and_datas_from_remote();
-
     }
 }

@@ -73,7 +73,8 @@ final class external_test extends externallib_advanced_testcase {
             $config->user_datas,
         );
         $result = external_api::clean_returnvalue(
-            tool_import_user_datas_external::get_user_datas_and_preferences_returns(), $result
+            tool_import_user_datas_external::get_user_datas_and_preferences_returns(),
+            $result
         );
         $this->assertCount(2, $result['preferences']);
         $this->assertCount(3, $result['userdatas']);
@@ -111,9 +112,13 @@ final class external_test extends externallib_advanced_testcase {
         $this->setUser($testuser);
         $this->expectException(required_capability_exception::class);
         $this->expectExceptionMessage(
-            get_string('nopermissions', 'error',
-                get_string('import_user_datas:get_user_preferences_and_datas_for_user',
-                'tool_import_user_datas')
+            get_string(
+                'nopermissions',
+                'error',
+                get_string(
+                    'import_user_datas:get_user_preferences_and_datas_for_user',
+                    'tool_import_user_datas'
+                )
             )
         );
         \tool_import_user_datas_external::get_user_datas_and_preferences(
@@ -128,7 +133,7 @@ final class external_test extends externallib_advanced_testcase {
      * Create user for tests
      * @return void
      */
-    private function create_user($triggeroncreate=false): void {
+    private function create_user($triggeroncreate = false): void {
         set_config('trigger_on_create', $triggeroncreate, 'tool_import_user_datas');
         set_config('user_auth', 'manual', 'tool_import_user_datas');
         $datagenerator = $this->getDataGenerator();

@@ -36,7 +36,6 @@ use tool_import_user_datas\user_import_preferences_and_datas_task;
  * Webservice functions defintion class to import user datas from a remote Moodle
  */
 class tool_import_user_datas_external extends \core_external\external_api {
-
     /**
      * webservice function parameters function
      * @return external_function_parameters
@@ -69,7 +68,8 @@ class tool_import_user_datas_external extends \core_external\external_api {
         global $DB, $CFG, $USER;
         require_capability('tool/import_user_datas:get_user_preferences_and_datas_for_user', context_system::instance());
         require_once($CFG->dirroot . '/user/externallib.php');
-        self::validate_parameters(self::get_user_datas_and_preferences_parameters(),
+        self::validate_parameters(
+            self::get_user_datas_and_preferences_parameters(),
             [
                 'username' => $username,
                 'userauth' => $userauth,
@@ -87,7 +87,7 @@ class tool_import_user_datas_external extends \core_external\external_api {
         // Call $preferences web service.
         $preferencestoimport = core_user_external::get_user_preferences('', $user->id);
         foreach ($preferencestoimport['preferences'] as $index => $preferencetoimport) {
-            if (!in_array($preferencetoimport['name'], $preferences) ) {
+            if (!in_array($preferencetoimport['name'], $preferences)) {
                 unset($preferencestoimport['preferences'][$index]);
             }
         }
@@ -153,7 +153,8 @@ class tool_import_user_datas_external extends \core_external\external_api {
      * @throws moodle_exception
      */
     public static function change_task_status($taskid, $status) {
-        self::validate_parameters(self::change_task_status_parameters(),
+        self::validate_parameters(
+            self::change_task_status_parameters(),
             [
                 'taskid' => $taskid,
                 'status' => $status,

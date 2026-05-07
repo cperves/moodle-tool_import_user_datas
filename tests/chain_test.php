@@ -34,7 +34,6 @@ use tool_import_user_datas\user_import_preferences_and_datas_task;
  * All task chain test class
  */
 final class chain_test extends advanced_testcase {
-
     /**
      * test all chain of import with a mocked response
      * @covers \tool_import_user_datas\user_import_preferences_and_datas_task

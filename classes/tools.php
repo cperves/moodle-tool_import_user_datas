@@ -45,7 +45,6 @@ require_once($CFG->libdir . '/filelib.php');
  * general tool class for tool_import_user_datas tool
  */
 class tools {
-
     /**
      * constant for webservice role name
      */
@@ -84,12 +83,12 @@ class tools {
      * @throws \dml_exception
      * @throws moodle_exception
      */
-    public static function rest_call_remote_moodle($wsfunction, $params=[], $restformat='json', $method='post') {
+    public static function rest_call_remote_moodle($wsfunction, $params = [], $restformat = 'json', $method = 'post') {
         global $CFG;
-        require_once($CFG->dirroot.'/webservice/lib.php');
+        require_once($CFG->dirroot . '/webservice/lib.php');
         $config = get_config('tool_import_user_datas');
         $serverurl = $config->remote_url . '/webservice/rest/server.php'
-            .'?wstoken=' . $config->remote_token . '&wsfunction='.$wsfunction;
+            . '?wstoken=' . $config->remote_token . '&wsfunction=' . $wsfunction;
         $restformat = ($restformat == 'json') ? '&moodlewsrestformat=' . $restformat : '';
         $curl = new curl();
         $resp = null;
@@ -107,9 +106,9 @@ class tools {
         if (!isset($resp)) {
             // Retrieve infos in curl.
             throw new moodle_exception(
-                'curl error , httpcode : '.$curl->get_info()['http_code'].' curl error number '.$curl->get_errno()
+                'curl error , httpcode : ' . $curl->get_info()['http_code'] . ' curl error number '
+                . $curl->get_errno()
             );
-
         }
         return $resp;
     }
@@ -150,7 +149,7 @@ class tools {
         $user = $DB->get_record('user', ['username' => $username, 'mnethostid' => $CFG->mnet_localhost_id]);
         if (property_exists($userdatasandprefs, 'preferences') && count($userdatasandprefs->preferences) > 0) {
             foreach ($userdatasandprefs->preferences as $remotepref) {
-                if (in_array($remotepref->name, $preferencestotreat) ) {
+                if (in_array($remotepref->name, $preferencestotreat)) {
                     $prefname = $remotepref->name;
                     $prefvalue = $remotepref->value;
                     set_user_preference($prefname, $prefvalue, $user);
@@ -161,7 +160,7 @@ class tools {
             $updateuser = false;
             foreach ($userdatasandprefs->userdatas as $userdata) {
                 // Filter datas.
-                if (in_array($userdata->name, $userdatastotreat) ) {
+                if (in_array($userdata->name, $userdatastotreat)) {
                     if ($user->{$userdata->name} != $userdata->value) {
                         $user->{$userdata->name} = $userdata->value;
                         $updateuser = true;
@@ -183,24 +182,41 @@ class tools {
      */
     public static function install_webservice() {
         global $CFG, $DB;
-        require_once($CFG->dirroot.'/webservice/lib.php');
+        require_once($CFG->dirroot . '/webservice/lib.php');
         $systemcontext = context_system::instance();
         $rolerecord = $DB->get_record('role', ['shortname' => self::TOOL_IMPORT_USER_DATAS_WS_ROLE]);
         $wsroleid = 0;
         if ($rolerecord) {
             $wsroleid = $rolerecord->id;
-            cli_writeln('role '.self::TOOL_IMPORT_USER_DATAS_WS_ROLE.' already exists, we\'ll use it');
+            cli_writeln('role ' . self::TOOL_IMPORT_USER_DATAS_WS_ROLE . ' already exists, we\'ll use it');
         } else {
-            $wsroleid = create_role(self::TOOL_IMPORT_USER_DATAS_WS_ROLE,
+            $wsroleid = create_role(
                 self::TOOL_IMPORT_USER_DATAS_WS_ROLE,
-                self::TOOL_IMPORT_USER_DATAS_WS_ROLE);
+                self::TOOL_IMPORT_USER_DATAS_WS_ROLE,
+                self::TOOL_IMPORT_USER_DATAS_WS_ROLE
+            );
         }
-        assign_capability('tool/import_user_datas:get_user_preferences_and_datas_for_user', CAP_ALLOW,
-            $wsroleid, $systemcontext->id, true);
-        assign_capability('tool/import_user_datas:set_user_preferences_and_datas_for_user', CAP_ALLOW,
-            $wsroleid, $systemcontext->id, true);
-        assign_capability('moodle/site:config', CAP_ALLOW,
-            $wsroleid, $systemcontext->id, true);
+        assign_capability(
+            'tool/import_user_datas:get_user_preferences_and_datas_for_user',
+            CAP_ALLOW,
+            $wsroleid,
+            $systemcontext->id,
+            true
+        );
+        assign_capability(
+            'tool/import_user_datas:set_user_preferences_and_datas_for_user',
+            CAP_ALLOW,
+            $wsroleid,
+            $systemcontext->id,
+            true
+        );
+        assign_capability(
+            'moodle/site:config',
+            CAP_ALLOW,
+            $wsroleid,
+            $systemcontext->id,
+            true
+        );
 
         // Allow role assignment on system.
         set_role_contextlevels($wsroleid, [10 => 10]);
@@ -209,11 +225,11 @@ class tools {
             $wsuser = create_user_record(self::TOOL_IMPORT_USER_DATAS_WS_USER, generate_password(20));
             $wsuser->firstname = 'wsuser';
             $wsuser->lastname = self::TOOL_IMPORT_USER_DATAS_WS_USER;
-            $wsuser->email = 'ws_dtas'.$CFG->noreplyaddress;
+            $wsuser->email = 'ws_dtas' . $CFG->noreplyaddress;
             $wsuser->confirmed = 1;
             $DB->update_record('user', $wsuser);
         } else {
-            cli_writeln('user '.self::TOOL_IMPORT_USER_DATAS_WS_USER.'already exists, we\'ll use it');
+            cli_writeln('user ' . self::TOOL_IMPORT_USER_DATAS_WS_USER . 'already exists, we\'ll use it');
         }
         role_assign($wsroleid, $wsuser->id, $systemcontext->id);
         $service = $DB->get_record('external_services', ['shortname' => 'wstoolimportuserdatas']);
@@ -252,7 +268,8 @@ class tools {
             'tool_import_user_datas',
             'error_import_user_datas_provider'
         );
-        $user = $DB->get_record('user',
+        $user = $DB->get_record(
+            'user',
             ['username' => '' . $task->username, 'mnethostid' => $CFG->mnet_localhost_id]
         );
         if (!$user) {

@@ -72,18 +72,18 @@ class import_user_datas_tasks extends system_report {
         $entitityname = 'import_user_datas_task';
 
         $this->add_columns_from_entities([
-            $entitityname.':id',
-            $entitityname.':username',
-            $entitityname.':auth',
-            $entitityname.':firstname',
-            $entitityname.':lastname',
-            $entitityname.':email',
-            $entitityname.':status',
-            $entitityname.':timecreated',
-            $entitityname.':timemodified',
-            $entitityname.':timeprocessed',
+            $entitityname . ':id',
+            $entitityname . ':username',
+            $entitityname . ':auth',
+            $entitityname . ':firstname',
+            $entitityname . ':lastname',
+            $entitityname . ':email',
+            $entitityname . ':status',
+            $entitityname . ':timecreated',
+            $entitityname . ':timemodified',
+            $entitityname . ':timeprocessed',
         ]);
-        $this->set_initial_sort_column($entitityname.':id', SORT_DESC);
+        $this->set_initial_sort_column($entitityname . ':id', SORT_DESC);
     }
 
     /**
@@ -93,15 +93,15 @@ class import_user_datas_tasks extends system_report {
     protected function add_filters(): void {
         $entitityname = 'import_user_datas_task';
         $filters = [
-            $entitityname.':id',
-            $entitityname.':username',
-            $entitityname.':firstname',
-            $entitityname.':lastname',
-            $entitityname.':email',
-            $entitityname.':status',
-            $entitityname.':timecreated',
-            $entitityname.':timemodified',
-            $entitityname.':timeprocessed',
+            $entitityname . ':id',
+            $entitityname . ':username',
+            $entitityname . ':firstname',
+            $entitityname . ':lastname',
+            $entitityname . ':email',
+            $entitityname . ':status',
+            $entitityname . ':timecreated',
+            $entitityname . ':timemodified',
+            $entitityname . ':timeprocessed',
         ];
 
         $this->add_filters_from_entities($filters);
