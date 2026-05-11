@@ -60,14 +60,17 @@ jobs:
 
       - name: Install moodle-plugin-ci
         run: |
-          moodle-plugin-ci add-plugin cperves/moodle-local_generic_admin_notifier
-          moodle-plugin-ci install
           moodle-plugin-ci install --plugin ./plugin --db-host=127.0.0.1
         env:
           DB: ${{ matrix.database }}
           MOODLE_BRANCH: ${{ matrix.moodle-branch }}
           # Uncomment this to run Behat tests using the Moodle App.
           # MOODLE_APP: 'true'
+
+      - name: add moodle plugin dependencies
+        run: |
+          moodle-plugin-ci add-plugin cperves/moodle-local_generic_admin_notifier 
+          moodle-plugin-ci install --db-host=127.0.0.1
 
       - name: PHP Lint
         if: ${{ !cancelled() }}
