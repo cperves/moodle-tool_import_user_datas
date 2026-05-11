@@ -75,10 +75,10 @@ class tools {
 
     /**
      * rest call method to call remote moodle
-     * @param $wsfunction
-     * @param $params
-     * @param $restformat
-     * @param $method
+     * @param string $wsfunction webservice function name
+     * @param array $params webservice function parameters
+     * @param string $restformat rest format, default json
+     * @param string $method curl method, default post
      * @return mixed
      * @throws \dml_exception
      * @throws moodle_exception
@@ -126,9 +126,8 @@ class tools {
 
     /**
      * set user preferences in current moodle
-     * @param \moodle_database $DB
-     * @param mixed $task
-     * @param mixed $userdatasandprefs formatted as
+     * @param string $username username
+     * @param array $userdatasandprefs formatted as
      *      ['preferences'=>[['name'=>...,'value'=>...],...],'userdatas' => [['name' => ...,'value' => ...],...]]
      * @return void
      * @throws \dml_exception

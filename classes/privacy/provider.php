@@ -233,8 +233,9 @@ class provider implements
     }
 
     /**
-     * sanitize contextlist course and system context
-     * @param approved_contextlist $contextlist
+     * Sanitize contextlist course and system context
+     * @param approved_contextlist $contextlist aproved context list
+     * @params array $contextlevellist context level list
      * @return mixed
      */
     protected static function validate_contextlist_contexts(approved_contextlist $contextlist, $contextlevellist) {

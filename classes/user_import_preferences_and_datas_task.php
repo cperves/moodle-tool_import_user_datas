@@ -50,9 +50,9 @@ class user_import_preferences_and_datas_task {
     const STATUS_PERFORMED = 2;
 
     /**
-     * schedule user data import task by saving in datatable
-     * @param $username
-     * @param $auth
+     * Schedule user data import task by saving in datatable
+     * @param string $username username
+     * @param string $auth auth method
      * @return int
      * @throws \dml_exception
      * @throws moodle_exception
@@ -75,7 +75,7 @@ class user_import_preferences_and_datas_task {
 
     /**
      * get task associated to a given username
-     * @param $username
+     * @param string $username username
      * @return false|mixed|\stdClass
      * @throws \dml_exception
      */
@@ -86,8 +86,8 @@ class user_import_preferences_and_datas_task {
 
     /**
      * update schedule status of a task associated to a username
-     * @param $username
-     * @param $status
+     * @param string $username username
+     * @param bool $status task status
      * @return bool
      * @throws \dml_exception
      * @throws moodle_exception
@@ -116,8 +116,8 @@ class user_import_preferences_and_datas_task {
 
     /**
      * update status for a scheduled task with a given taskid
-     * @param $taskid
-     * @param $status
+     * @param int $taskid task id
+     * @param int $status status
      * @return bool
      * @throws \dml_exception
      * @throws moodle_exception
@@ -154,7 +154,7 @@ class user_import_preferences_and_datas_task {
 
     /**
      * retrieve tasks for a given status
-     * @param $status
+     * @param int $status status
      * @return array
      * @throws \dml_exception
      */
@@ -175,7 +175,7 @@ class user_import_preferences_and_datas_task {
 
     /**
      * return the task associated to a given username
-     * @param $username
+     * @param string $username
      * @return mixed
      * @throws \dml_exception
      * @throws moodle_exception

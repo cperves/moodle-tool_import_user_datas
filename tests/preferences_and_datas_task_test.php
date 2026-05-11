@@ -198,10 +198,10 @@ final class preferences_and_datas_task_test extends advanced_testcase {
     }
 
     /**
-     * check status
-     * @param moodle_database $DB
-     * @param stdClass $user
-     * @param $userrecord
+     * Check status
+     * @param moodle_database $DB moodle database
+     * @param \stdClass $user user object
+     * @param \stdClass$userrecord userrecord
      * @return void
      * @throws dml_exception
      */
