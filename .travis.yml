@@ -21,13 +21,12 @@ cache:
     - $HOME/.npm
 
 php:
- - 7.4
- - 8.1
+ - 8.2
  - 8.3
 
 env:
  global:
-  - PGVER=14
+  - PGVER=15
   - MOODLE_BRANCH=MOODLE_405_STABLE
   # Uncomment this to run Behat tests using the Moodle App.
   # - MOODLE_APP=true
