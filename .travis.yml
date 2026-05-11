@@ -50,6 +50,8 @@ install:
   - moodle-plugin-ci install
 
 script:
+  - moodle-plugin-ci add-plugin cperves/moodle-local_generic_admin_notifier
+  - moodle-plugin-ci install
   - moodle-plugin-ci phplint
   - moodle-plugin-ci phpmd
   - moodle-plugin-ci phpcs --max-warnings 0
