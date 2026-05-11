@@ -69,7 +69,7 @@ jobs:
 
       - name: add moodle plugin dependencies
         run: |
-          moodle-plugin-ci add-plugin --branch $GITHUB_REF  cperves/moodle-local_generic_admin_notifier
+          moodle-plugin-ci add-plugin --branch $GITHUB_REF_NAME  cperves/moodle-local_generic_admin_notifier
           moodle-plugin-ci install --db-host=127.0.0.1
 
       - name: PHP Lint
