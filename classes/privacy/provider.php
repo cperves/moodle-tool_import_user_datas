@@ -30,7 +30,6 @@ use context_user;
 use core_privacy\local\metadata\collection;
 use core_privacy\local\request\approved_contextlist;
 use core_privacy\local\request\approved_userlist;
-use core_privacy\local\request\context;
 use core_privacy\local\request\contextlist;
 use core_privacy\local\request\userlist;
 use core_privacy\local\request\writer;
@@ -160,7 +159,7 @@ class provider implements
     /**
      * Delete all data for all users in the specified context.
      *
-     * @param   context $context The specific context to delete data for.
+     * @param  \context $context The specific context to delete data for.
      */
     public static function delete_data_for_all_users_in_context(\context $context) {
         global $DB;

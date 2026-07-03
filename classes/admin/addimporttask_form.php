@@ -84,7 +84,7 @@ class addimporttask_form extends moodleform {
      * @throws \dml_exception
      * @throws coding_exception
      */
-    public function validation($data, $files) {
+    public function validation($data, $files): array {
         global $DB;
         $errors = parent::validation($data, $files);
         if (!$DB->record_exists('user', ['username' => $data['username']])) {
