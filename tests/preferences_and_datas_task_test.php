@@ -199,11 +199,10 @@ final class preferences_and_datas_task_test extends advanced_testcase {
 
     /**
      * Check status
-     * @param moodle_database $DB moodle database
-     * @param \stdClass $user user object
-     * @param \stdClass$userrecord userrecord
+     * @param $username
+     * @param $status
      * @return void
-     * @throws dml_exception
+     * @throws \dml_exception
      */
     private function check_status($username, $status): void {
         global $DB;

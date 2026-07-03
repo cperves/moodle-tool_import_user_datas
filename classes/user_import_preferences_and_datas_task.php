@@ -35,19 +35,19 @@ class user_import_preferences_and_datas_task {
     /**
      * Task error status
      */
-    const STATUS_ERROR = -1;
+    public const STATUS_ERROR = -1;
     /**
      * Task scheduled status
      */
-    const STATUS_SHEDULED = 0;
+    public const STATUS_SHEDULED = 0;
     /**
      * Task In progress status
      */
-    const STATUS_INPROGRESS = 1;
+    public const STATUS_INPROGRESS = 1;
     /**
      * Task performed status
      */
-    const STATUS_PERFORMED = 2;
+    public const STATUS_PERFORMED = 2;
 
     /**
      * Schedule user data import task by saving in datatable

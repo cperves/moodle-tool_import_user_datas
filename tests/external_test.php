@@ -131,7 +131,7 @@ final class external_test extends externallib_advanced_testcase {
 
     /**
      * Create user for tests
-     * @params boolean $triggeroncreate if trigger on user creation
+     * @param $triggeroncreate
      * @return void
      */
     private function create_user($triggeroncreate = false): void {
