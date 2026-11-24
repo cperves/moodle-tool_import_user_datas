@@ -67,6 +67,7 @@ class tool_import_user_datas_external extends \core_external\external_api {
     public static function get_user_datas_and_preferences($username, $userauth, $preferences, $userdatas) {
         global $DB, $CFG, $USER;
         require_capability('tool/import_user_datas:get_user_preferences_and_datas_for_user', context_system::instance());
+        self::validate_context(context_system::instance());
         require_once($CFG->dirroot . '/user/externallib.php');
         self::validate_parameters(
             self::get_user_datas_and_preferences_parameters(),
