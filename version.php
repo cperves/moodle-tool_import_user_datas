@@ -25,9 +25,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2025100100;
+$plugin->version   = 2026112400;
 $plugin->requires  = 2024100702;
 $plugin->component = 'tool_import_user_datas';
 $plugin->dependencies = ['local_generic_admin_notifier' => ANY_VERSION];
-$plugin->release = '1.0.0';
+$plugin->release = '1.1.0';
 $plugin->maturity   = MATURITY_STABLE;
