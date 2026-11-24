@@ -165,12 +165,12 @@ class provider implements
         global $DB;
         // Can't remove enrolment since can\'t be sure it comes from.
         if ($context instanceof \context_user) {
-            $DB->execute(
-                "delete from {tool_import_user_datas}
-                        where username in (
+            $DB->delete_records_select(
+                'tool_import_user_datas',
+                'username in (
                          select username from {user} where id=:userid
                         )
-                        and status <> :status",
+                        and status <> :status',
                 [
                     'userid' => $context->instanceid,
                     'status' => user_import_preferences_and_datas_task::STATUS_INPROGRESS,
