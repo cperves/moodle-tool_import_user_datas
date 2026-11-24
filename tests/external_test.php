@@ -22,12 +22,12 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-
-
 namespace tool_import_user_datas;
+
 use core\exception\moodle_exception;
 use core_external\external_api;
 use externallib_advanced_testcase;
+use stdClass;
 use tool_import_user_datas_external;
 
 defined('MOODLE_INTERNAL') || die();
@@ -43,7 +43,8 @@ require_once($CFG->dirroot . '/admin/tool/import_user_datas/externallib.php');
  */
 final class external_test extends externallib_advanced_testcase {
     /**
-     * @var user
+     * user object
+     * @var stdClass
      */
     private $user;
 
@@ -132,7 +133,7 @@ final class external_test extends externallib_advanced_testcase {
 
     /**
      * Create user for tests
-     * @param $triggeroncreate
+     * @param boolean $triggeroncreate
      * @return void
      */
     private function create_user($triggeroncreate = false): void {

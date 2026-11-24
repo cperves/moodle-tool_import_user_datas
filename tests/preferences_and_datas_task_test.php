@@ -57,7 +57,6 @@ final class preferences_and_datas_task_test extends advanced_testcase {
      * @throws \dml_exception
      */
     public function update_scheduled_status_test(): void {
-        global $DB;
         $user = $this->getDataGenerator()->create_user();
         user_import_preferences_and_datas_task::schedule_user_datas_import($user->username, $user->auth);
         $this->check_status($user->username, user_import_preferences_and_datas_task::STATUS_SHEDULED);
@@ -107,7 +106,6 @@ final class preferences_and_datas_task_test extends advanced_testcase {
      * @throws \dml_exception
      */
     public function test_retrieve_tasks_to_perform_paging(): void {
-        global $DB;
         set_config('paging', '2', 'tool_import_user_datas');
         set_config('activated', 1, 'tool_import_user_datas');
         $user1 = $this->getDataGenerator()->create_user();
@@ -200,8 +198,8 @@ final class preferences_and_datas_task_test extends advanced_testcase {
 
     /**
      * Check status
-     * @param $username
-     * @param $status
+     * @param string $username
+     * @param int $status
      * @return void
      * @throws \dml_exception
      */

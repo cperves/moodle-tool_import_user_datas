@@ -21,6 +21,7 @@
  * @author Celine Perves <cperves@unistra.fr>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 namespace tool_import_user_datas\reportbuilder\local\entities;
 
 use core\output\actions\component_action;
@@ -68,7 +69,6 @@ class import_user_datas_task extends base {
      * @return base
      */
     public function initialise(): base {
-        $tablealias = $this->get_table_alias('tool_import_user_datas');
         $columns = $this->get_all_columns();
         foreach ($columns as $column) {
             $this->add_column($column);
@@ -169,8 +169,6 @@ class import_user_datas_task extends base {
             ->add_fields("{$tablealias}.status, {$tablealias}.id")
             ->set_is_sortable(true)
             ->set_callback(static function (?string $value, \stdClass $row): string {
-                global $OUTPUT;
-                $url = new moodle_url('/admin/tool/import_user_datas/WS');
                 $options = [
                     user_import_preferences_and_datas_task::STATUS_SHEDULED =>
                         new lang_string('scheduledstatus', 'tool_import_user_datas'),
@@ -181,14 +179,13 @@ class import_user_datas_task extends base {
                     user_import_preferences_and_datas_task::STATUS_ERROR =>
                         new lang_string('errorstatus', 'tool_import_user_datas'),
                 ];
-                $selectmenu = \html_writer::select(
+                return \html_writer::select(
                     $options,
                     'status_select_' . $row->id,
                     $value,
                     null,
                     ['onchange' => 'asyncchangestatus(' . $row->id . ')']
                 );
-                return $selectmenu;
             });
         $columns[] = (
             new column(
@@ -253,8 +250,6 @@ class import_user_datas_task extends base {
      * @return filter[]
      */
     protected function get_all_filters(): array {
-        global $DB;
-
         $tablealias = $this->get_table_alias('tool_import_user_datas');
         $useralias = $this->get_table_alias('user');
 
@@ -287,7 +282,7 @@ class import_user_datas_task extends base {
                 ->add_joins($this->get_joins())
                 ->set_options_callback(
                     static function (): array {
-                        $status = [
+                        return [
                             user_import_preferences_and_datas_task::STATUS_SHEDULED =>
                                 new lang_string('scheduledstatus', 'tool_import_user_datas'),
                             user_import_preferences_and_datas_task::STATUS_INPROGRESS =>
@@ -298,7 +293,6 @@ class import_user_datas_task extends base {
                                 new lang_string('errorstatus', 'tool_import_user_datas'),
 
                         ];
-                        return $status;
                     }
                 );
         $filters[] =

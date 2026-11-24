@@ -40,7 +40,7 @@ class tool_import_user_datas_external extends \core_external\external_api {
      * webservice function parameters function
      * @return external_function_parameters
      */
-    public static function get_user_datas_and_preferences_parameters() {
+    public static function get_user_datas_and_preferences_parameters(): external_function_parameters {
         return new external_function_parameters(
             [
                 'username' => new external_value(PARAM_TEXT, 'username of the user, default to current user', VALUE_REQUIRED),
@@ -53,10 +53,10 @@ class tool_import_user_datas_external extends \core_external\external_api {
 
     /**
      *  webservice function execution function that retrieve user datas
-     * @param $username
-     * @param $userauth
-     * @param $preferences
-     * @param $userdatas
+     * @param string $username
+     * @param string $userauth
+     * @param string $preferences
+     * @param string $userdatas
      * @return array
      * @throws moodle_exception
      * @throws dml_exception
@@ -65,7 +65,7 @@ class tool_import_user_datas_external extends \core_external\external_api {
      * @throws required_capability_exception
      */
     public static function get_user_datas_and_preferences($username, $userauth, $preferences, $userdatas) {
-        global $DB, $CFG, $USER;
+        global $DB, $CFG;
         require_capability('tool/import_user_datas:get_user_preferences_and_datas_for_user', context_system::instance());
         self::validate_context(context_system::instance());
         require_once($CFG->dirroot . '/user/externallib.php');
@@ -151,8 +151,8 @@ class tool_import_user_datas_external extends \core_external\external_api {
 
     /**
      * Webservice function execution for change task status
-     * @param $taskid
-     * @param $status
+     * @param int $taskid
+     * @param int $status
      * @return array
      * @throws dml_exception
      * @throws invalid_parameter_exception

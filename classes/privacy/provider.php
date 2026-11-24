@@ -109,7 +109,6 @@ class provider implements
      * @param   userlist    $userlist   The userlist containing the list of users who have data in this context/plugin combination.
      */
     public static function get_users_in_context(userlist $userlist) {
-        global $DB;
         $context = $userlist->get_context();
         if ($context instanceof context_user || $context instanceof context_course) {
             if ($context instanceof context_user) {
@@ -234,7 +233,7 @@ class provider implements
     /**
      * Sanitize contextlist course and system context
      * @param approved_contextlist $contextlist
-     * @param $contextlevellist
+     * @param array $contextlevellist
      * @return mixed
      */
     protected static function validate_contextlist_contexts(approved_contextlist $contextlist, $contextlevellist) {

@@ -25,17 +25,12 @@
 namespace tool_import_user_datas;
 
 use core\exception\coding_exception;
-use tool_import_user_datas\user_import_preferences_and_datas_task;
-use tool_import_user_datas_tools;
-use context_course;
 use context_user;
-use core_privacy\local\request\approved_contextlist;
 use core_privacy\local\request\writer;
 use core_privacy\local\request\approved_userlist;
+use dml_exception;
 use tool_import_user_datas\privacy\provider;
 use core_privacy\tests\provider_testcase;
-use core_user;
-use stdClass;
 
 /**
  * Unit tests for the privacy API implementation.

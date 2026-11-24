@@ -22,7 +22,9 @@
  * @author Celine Perves <cperves@unistra.fr>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 namespace tool_import_user_datas\admin;
+
 use coding_exception;
 use core\exception\moodle_exception;
 use moodleform;
@@ -42,7 +44,6 @@ class addimporttask_form extends moodleform {
      * @throws moodle_exception
      */
     protected function definition() {
-        global $CFG;
         $mform = &$this->_form;
         $mform->addElement('text', 'username', get_string('username'));
         $mform->setType('username', PARAM_TEXT);
@@ -75,8 +76,8 @@ class addimporttask_form extends moodleform {
 
     /**
      * form validation
-     * @param $data
-     * @param $files
+     * @param array $data
+     * @param array $files
      * @return array
      * @throws \dml_exception
      * @throws coding_exception

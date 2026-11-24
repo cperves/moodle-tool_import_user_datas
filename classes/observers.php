@@ -22,6 +22,7 @@
  * @author Celine Perves <cperves@unistra.fr>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 namespace tool_import_user_datas;
 
 use core\exception\moodle_exception;
