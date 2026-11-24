@@ -81,9 +81,14 @@ class tool_import_user_datas_external extends \core_external\external_api {
         $preferences = explode(";", $preferences);
         $userdatas = explode(";", $userdatas);
         // Search user.
-        $user = $DB->get_record('user', ['username' => $username, 'auth' => $userauth]);
+        $parameters = ['username' => $username, 'auth' => $userauth];
+        $user = $DB->get_record('user', $parameters);
         if (!$user) {
-            throw new moodle_exception("user $username not exists", 'tool_import_user_datas');
+            throw new moodle_exception(
+                'user_not_exists',
+                'tool_import_user_datas',
+                (object) $parameters
+            );
         }
         // Call $preferences web service.
         $preferencestoimport = core_user_external::get_user_preferences('', $user->id);
