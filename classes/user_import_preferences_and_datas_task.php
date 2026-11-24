@@ -26,7 +26,6 @@
 namespace tool_import_user_datas;
 
 use core\exception\moodle_exception;
-use enrol_self\self_test;
 
 /**
  * import user datas task datatable entity

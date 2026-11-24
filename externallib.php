@@ -58,7 +58,7 @@ class tool_import_user_datas_external extends \core_external\external_api {
      * @param $preferences
      * @param $userdatas
      * @return array
-     * @throws \moodle_exception
+     * @throws moodle_exception
      * @throws dml_exception
      * @throws invalid_parameter_exception
      * @throws moodle_exception

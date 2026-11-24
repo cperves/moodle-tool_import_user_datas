@@ -26,10 +26,7 @@ namespace tool_import_user_datas\admin;
 use coding_exception;
 use core\exception\moodle_exception;
 use moodleform;
-use MoodleQuickForm_checkbox;
-use MoodleQuickForm_radio;
 use MoodleQuickForm_text;
-use MoodleQuickForm_textarea;
 
 defined('MOODLE_INTERNAL') || die();
 require_once("$CFG->libdir/formslib.php");

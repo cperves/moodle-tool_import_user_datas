@@ -16,6 +16,7 @@
 
 namespace tool_import_user_datas;
 use advanced_testcase;
+use core\exception\moodle_exception;
 use phpunit_util;
 use tool_import_user_datas\task\perform_scheduled_preferences_import;
 
@@ -31,7 +32,7 @@ final class preferences_and_datas_task_test extends advanced_testcase {
      * test task scheduled
      * @covers \tool_import_user_datas\user_import_preferences_and_datas_task::schedule_user_datas_import
      * @return void
-     * @throws \core\exception\moodle_exception
+     * @throws moodle_exception
      * @throws \dml_exception
      */
     public function test_schedule_user_datas_import(): void {
@@ -52,7 +53,7 @@ final class preferences_and_datas_task_test extends advanced_testcase {
      * test various task state update
      * @covers \tool_import_user_datas\user_import_preferences_and_datas_task::update_scheduled_status
      * @return void
-     * @throws \core\exception\moodle_exception
+     * @throws moodle_exception
      * @throws \dml_exception
      */
     public function update_scheduled_status_test(): void {
@@ -81,7 +82,7 @@ final class preferences_and_datas_task_test extends advanced_testcase {
      * test task to perform retrieval
      * @covers \tool_import_user_datas\user_import_preferences_and_datas_task::retrieve_tasks_to_perform
      * @return void
-     * @throws \core\exception\moodle_exception
+     * @throws moodle_exception
      * @throws \dml_exception
      */
     public function test_retrieve_tasks_to_perform(): void {
@@ -102,7 +103,7 @@ final class preferences_and_datas_task_test extends advanced_testcase {
      * test task to perform retrieval paging
      * @covers \tool_import_user_datas\user_import_preferences_and_datas_task::retrieve_tasks_to_perform
      * @return void
-     * @throws \core\exception\moodle_exception
+     * @throws moodle_exception
      * @throws \dml_exception
      */
     public function test_retrieve_tasks_to_perform_paging(): void {
@@ -131,7 +132,7 @@ final class preferences_and_datas_task_test extends advanced_testcase {
      * test task to perform cron
      * @covers \tool_import_user_datas\task\perform_scheduled_preferences_import
      * @return void
-     * @throws \core\exception\moodle_exception
+     * @throws moodle_exception
      * @throws \dml_exception
      */
     public function test_perform_task_cron(): void {
@@ -168,7 +169,7 @@ final class preferences_and_datas_task_test extends advanced_testcase {
      * test task to perform adhoc task
      * @covers \tool_import_user_datas\user_import_preferences_and_datas_task::retrieve_tasks_to_perform
      * @return void
-     * @throws \core\exception\moodle_exception
+     * @throws moodle_exception
      * @throws \dml_exception
      */
     public function test_perform_task_adhoc(): void {

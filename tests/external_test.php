@@ -25,6 +25,7 @@
 
 
 namespace tool_import_user_datas;
+use core\exception\moodle_exception;
 use core_external\external_api;
 use externallib_advanced_testcase;
 use tool_import_user_datas_external;
@@ -52,11 +53,11 @@ final class external_test extends externallib_advanced_testcase {
      * @covers \tool_import_user_datas_external::get_user_datas_and_preferences_returns
      * @return void
      * @throws \coding_exception
-     * @throws \core\exception\moodle_exception
+     * @throws moodle_exception
      * @throws \dml_exception
      * @throws \invalid_parameter_exception
      * @throws \invalid_response_exception
-     * @throws \moodle_exception
+     * @throws moodle_exception
      * @throws \required_capability_exception
      */
     public function test_get_user_datas_and_preferences(): void {
@@ -94,7 +95,7 @@ final class external_test extends externallib_advanced_testcase {
      * @covers \tool_import_user_datas_external::get_user_datas_and_preferences_returns
      * @return void
      * @throws \coding_exception
-     * @throws \core\exception\moodle_exception
+     * @throws moodle_exception
      * @throws \dml_exception
      * @throws \invalid_parameter_exception
      * @throws \moodle_exception

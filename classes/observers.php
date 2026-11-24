@@ -24,6 +24,8 @@
  */
 namespace tool_import_user_datas;
 
+use core\exception\moodle_exception;
+
 /**
  * event observer class
  */
@@ -32,7 +34,7 @@ class observers {
      * user created event handler
      * @param \core\event\user_created $event
      * @return void
-     * @throws \core\exception\moodle_exception
+     * @throws moodle_exception
      * @throws \dml_exception
      */
     public static function user_created(\core\event\user_created $event) {

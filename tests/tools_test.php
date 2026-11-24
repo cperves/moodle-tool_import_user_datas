@@ -25,7 +25,10 @@ namespace tool_import_user_datas;
 
 use advanced_testcase;
 use context_system;
+use core\exception\coding_exception;
+use core\exception\moodle_exception;
 use core\exception\required_capability_exception;
+use dml_exception;
 
 defined('MOODLE_INTERNAL') || die();
 global $CFG;
@@ -40,7 +43,7 @@ final class tools_test extends advanced_testcase {
      * @return void
      * @throws \coding_exception
      * @throws \dml_exception
-     * @throws \moodle_exception
+     * @throws moodle_exception
      */
     public function test_set_user_preferences_and_datas(): void {
         global $DB;
@@ -143,7 +146,7 @@ final class tools_test extends advanced_testcase {
      * @return void
      * @throws \coding_exception
      * @throws \dml_exception
-     * @throws \moodle_exception
+     * @throws moodle_exception
      */
     public function test_set_user_preferences_and_datas_with_permission(): void {
         $this->create_and_set_webservice_user();
@@ -154,9 +157,9 @@ final class tools_test extends advanced_testcase {
      * test set_user_preferences_and_datas without correct permissions
      * @covers \tool_import_user_datas\tools::set_user_preferences_and_datas
      * @return void
-     * @throws \coding_exception
-     * @throws \dml_exception
-     * @throws \moodle_exception
+     * @throws coding_exception
+     * @throws dml_exception
+     * @throws moodle_exception
      */
     public function test_set_user_preferences_and_datas_without_permission(): void {
         $user = $this->getDataGenerator()->create_user();

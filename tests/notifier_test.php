@@ -25,6 +25,7 @@
 
 namespace tool_import_user_datas;
 use advanced_testcase;
+use core\exception\moodle_exception;
 use filter_embedquestion\output\error_message;
 use tool_import_user_datas\tools;
 use tool_import_user_datas\user_import_preferences_and_datas_task;
@@ -38,7 +39,7 @@ final class notifier_test extends advanced_testcase {
      * @covers \local_generic_admin_notifier\admin_notification_list::notify_admin
      * @return void
      * @throws \coding_exception
-     * @throws \core\exception\moodle_exception
+     * @throws moodle_exception
      * @throws \dml_exception
      */
     public function test_admin_notifier_usernotfound(): void {

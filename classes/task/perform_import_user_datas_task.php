@@ -24,6 +24,7 @@
 
 namespace tool_import_user_datas\task;
 
+use core\exception\moodle_exception;
 use core\task\adhoc_task;
 use tool_import_user_datas\tools;
 
@@ -37,7 +38,7 @@ class perform_import_user_datas_task extends adhoc_task {
     /**
      * execute adhoc task
      * @return void
-     * @throws \core\exception\moodle_exception
+     * @throws moodle_exception
      */
     public function execute() {
         $data = $this->get_custom_data();
